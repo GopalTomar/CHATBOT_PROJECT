@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Guide: Offline RAG Chatbot for User Manual</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .overview {
+            background: linear-gradient(135deg, #ff9a9e, #fecfef);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #e74c3c;
+        }
+        
+        .overview h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .phase {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #3498db;
+        }
+        
+        .phase h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .phase-icon {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+        
+        .step {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+        }
+        
+        .step h3 {
+            color: #2c3e50;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .tech-stack {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .tech-stack h4 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tech-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c3e50;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .flowchart {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .flowchart h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .flow-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .flow-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .flow-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            min-width: 200px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .flow-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .flow-box h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .flow-box p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .flow-arrow {
+            font-size: 2rem;
+            color: #3498db;
+            margin: 10px 0;
+        }
+        
+        .phase-separator {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #e74c3c, #f39c12, #f1c40f);
+            border-radius: 2px;
+            margin: 20px 0;
+        }
+        
+        .important-note {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border: 1px solid #f39c12;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #f39c12;
+        }
+        
+        .important-note h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .download-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 10px;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+        
+        .security-note {
+            background: linear-gradient(135deg, #d1ecf1, #bee5eb);
+            border: 1px solid #17a2b8;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #17a2b8;
+        }
+        
+        .security-note h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .flow-row {
+                flex-direction: column;
+            }
+            
+            .flow-box {
+                min-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Complete Guide: Offline RAG Chatbot</h1>
+            <p>Step-by-Step Implementation for User Manual Chatbot</p>
+        </div>
+
+        <div class="overview">
+            <h2>📋 Project Overview</h2>
+            <p><strong>Objective:</strong> Build a fully offline RAG (Retrieval-Augmented Generation) chatbot that can answer questions about a user manual without requiring internet connectivity.</p>
+            <br>
+            <p><strong>Key Requirements:</strong></p>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Complete offline operation (no internet dependency)</li>
+                <li>Secure deployment (all data stays local)</li>
+                <li>RAG architecture for accurate, context-aware responses</li>
+                <li>User-friendly interface for querying the manual</li>
+            </ul>
+        </div>
+
+        <div class="security-note">
+            <h4>🔒 Security & Privacy Features</h4>
+            <p>This implementation ensures complete data security by operating entirely offline. No data leaves your local system, making it suitable for sensitive documentation projects.</p>
+        </div>
+
+        <div class="flowchart">
+            <h2>🔄 RAG Architecture Flowchart</h2>
+            <div class="flow-container">
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>📄 User Manual</h4>
+                        <p>PDF/Word Document Input</p>
+                    </div>
+                </div>
+                <div class="flow-arrow">⬇️</div>
+                
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>🔍 Data Extraction</h4>
+                        <p>Text & Metadata Extraction</p>
+                    </div>
+                    <div class="flow-box">
+                        <h4>🧹 Preprocessing</h4>
+                        <p>Clean & Chunk Text</p>
+                    </div>
+                    <div class="flow-box">
+                        <h4>🧮 Embedding</h4>
+                        <p>Convert to Vectors</p>
+                    </div>
+                </div>
+                <div class="flow-arrow">⬇️</div>
+                
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>💾 Vector Database</h4>
+                        <p>Store Embeddings Locally</p>
+                    </div>
+                </div>
+                
+                <div class="phase-separator"></div>
+                
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>❓ User Query</h4>
+                        <p>Natural Language Question</p>
+                    </div>
+                </div>
+                <div class="flow-arrow">⬇️</div>
+                
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>🎯 Retrieval</h4>
+                        <p>Find Relevant Context</p>
+                    </div>
+                    <div class="flow-box">
+                        <h4>🔗 Augmentation</h4>
+                        <p>Combine Query + Context</p>
+                    </div>
+                    <div class="flow-box">
+                        <h4>🤖 LLM Generation</h4>
+                        <p>Generate Response</p>
+                    </div>
+                </div>
+                <div class="flow-arrow">⬇️</div>
+                
+                <div class="flow-row">
+                    <div class="flow-box">
+                        <h4>💬 Final Answer</h4>
+                        <p>Contextual Response to User</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2><span class="phase-icon">1</span>Phase 1: Data Ingestion Pipeline (Building Knowledge Base)</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">1.1</span>Environment Setup & Dependencies</h3>
+                <p><strong>Purpose:</strong> Install all required libraries and set up the development environment.</p>
+                
+                <div class="code-block">
+# Create virtual environment
+python -m venv rag_chatbot_env
+source rag_chatbot_env/bin/activate  # On Windows: rag_chatbot_env\Scripts\activate
+
+# Install required packages
+pip install sentence-transformers
+pip install chromadb
+pip install faiss-cpu
+pip install pypdf
+pip install python-docx
+pip install streamlit
+pip install torch
+pip install transformers
+pip install langchain
+pip install ollama  # For local LLM
+                </div>
+                
+                <div class="tech-stack">
+                    <h4>🛠️ Technology Stack:</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">Python 3.8+</span>
+                        <span class="tech-item">SentenceTransformers</span>
+                        <span class="tech-item">ChromaDB/FAISS</span>
+                        <span class="tech-item">PyPDF/python-docx</span>
+                        <span class="tech-item">Streamlit</span>
+                        <span class="tech-item">Ollama</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">1.2</span>Document Loading & Text Extraction</h3>
+                <p><strong>Purpose:</strong> Extract raw text content from your user manual files.</p>
+                
+                <div class="code-block">
+import pypdf
+from docx import Document
+import os
+
+def extract_text_from_pdf(pdf_path):
+    """Extract text from PDF file with page metadata"""
+    text_chunks = []
+    with open(pdf_path, 'rb') as file:
+        pdf_reader = pypdf.PdfReader(file)
+        for page_num, page in enumerate(pdf_reader.pages):
+            text = page.extract_text()
+            text_chunks.append({
+                'content': text,
+                'page': page_num + 1,
+                'source': pdf_path
+            })
+    return text_chunks
+
+def extract_text_from_docx(docx_path):
+    """Extract text from Word document"""
+    doc = Document(docx_path)
+    text_chunks = []
+    for i, paragraph in enumerate(doc.paragraphs):
+        if paragraph.text.strip():
+            text_chunks.append({
+                'content': paragraph.text,
+                'paragraph': i + 1,
+                'source': docx_path
+            })
+    return text_chunks
+                </div>
+                
+                <div class="important-note">
+                    <h4>💡 Best Practices:</h4>
+                    <p>Always preserve metadata (page numbers, sections) as they'll be crucial for citing sources in responses. Handle different file formats gracefully and implement error handling for corrupted files.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">1.3</span>Text Preprocessing & Chunking</h3>
+                <p><strong>Purpose:</strong> Clean and split text into optimal chunks for embedding and retrieval.</p>
+                
+                <div class="code-block">
+import re
+from typing import List, Dict
+
+def clean_text(text: str) -> str:
+    """Clean extracted text"""
+    # Remove excessive whitespace
+    text = re.sub(r'\s+', ' ', text)
+    # Remove special characters but keep punctuation
+    text = re.sub(r'[^\w\s\.\,\!\?\;\:\-\(\)]', '', text)
+    # Remove page headers/footers patterns
+    text = re.sub(r'Page \d+', '', text)
+    return text.strip()
+
+def smart_chunk_text(text: str, chunk_size: int = 500, overlap: int = 100) -> List[str]:
+    """Split text into chunks respecting sentence boundaries"""
+    sentences = text.split('. ')
+    chunks = []
+    current_chunk = ""
+    
+    for sentence in sentences:
+        if len(current_chunk) + len(sentence) < chunk_size:
+            current_chunk += sentence + ". "
+        else:
+            if current_chunk:
+                chunks.append(current_chunk.strip())
+            current_chunk = sentence + ". "
+    
+    if current_chunk:
+        chunks.append(current_chunk.strip())
+    
+    return chunks
+
+def process_documents(text_chunks: List[Dict]) -> List[Dict]:
+    """Process and chunk all documents"""
+    processed_chunks = []
+    chunk_id = 0
+    
+    for doc_chunk in text_chunks:
+        cleaned_text = clean_text(doc_chunk['content'])
+        if len(cleaned_text) > 50:  # Only process substantial content
+            text_chunks_list = smart_chunk_text(cleaned_text)
+            
+            for chunk_text in text_chunks_list:
+                processed_chunks.append({
+                    'id': chunk_id,
+                    'content': chunk_text,
+                    'metadata': {
+                        'source': doc_chunk.get('source', ''),
+                        'page': doc_chunk.get('page', 0),
+                        'paragraph': doc_chunk.get('paragraph', 0)
+                    }
+                })
+                chunk_id += 1
+    
+    return processed_chunks
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">1.4</span>Embedding Generation</h3>
+                <p><strong>Purpose:</strong> Convert text chunks into numerical vectors for semantic search.</p>
+                
+                <div class="code-block">
+from sentence_transformers import SentenceTransformer
+import numpy as np
+
+class EmbeddingGenerator:
+    def __init__(self, model_name: str = "all-MiniLM-L6-v2"):
+        """Initialize with a local embedding model"""
+        print(f"Loading embedding model: {model_name}")
+        self.model = SentenceTransformer(model_name)
+        print("Embedding model loaded successfully")
+    
+    def generate_embeddings(self, texts: List[str]) -> np.ndarray:
+        """Generate embeddings for a list of texts"""
+        print(f"Generating embeddings for {len(texts)} text chunks...")
+        embeddings = self.model.encode(texts, show_progress_bar=True)
+        print("Embeddings generated successfully")
+        return embeddings
+    
+    def generate_single_embedding(self, text: str) -> np.ndarray:
+        """Generate embedding for a single text"""
+        return self.model.encode([text])[0]
+
+# Usage example
+embedding_generator = EmbeddingGenerator()
+text_contents = [chunk['content'] for chunk in processed_chunks]
+embeddings = embedding_generator.generate_embeddings(text_contents)
+                </div>
+                
+                <div class="tech-stack">
+                    <h4>🎯 Embedding Model Options:</h4>
+                    <div class="tech-list">
+                        <span class="tech-item">all-MiniLM-L6-v2 (Lightweight)</span>
+                        <span class="tech-item">all-mpnet-base-v2 (Higher Quality)</span>
+                        <span class="tech-item">multi-qa-MiniLM-L6-cos-v1 (Q&A Optimized)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">1.5</span>Vector Database Setup & Population</h3>
+                <p><strong>Purpose:</strong> Store embeddings in a local database for fast similarity search.</p>
+                
+                <div class="code-block">
+import chromadb
+from chromadb.config import Settings
+import uuid
+
+class VectorDatabase:
+    def __init__(self, db_path: str = "./chroma_db"):
+        """Initialize ChromaDB for local storage"""
+        self.client = chromadb.PersistentClient(
+            path=db_path,
+            settings=Settings(anonymized_telemetry=False)
+        )
+        self.collection = self.client.get_or_create_collection(
+            name="user_manual_embeddings"
+        )
+        
+    def add_embeddings(self, chunks: List[Dict], embeddings: np.ndarray):
+        """Add embeddings to the vector database"""
+        ids = [str(uuid.uuid4()) for _ in chunks]
+        documents = [chunk['content'] for chunk in chunks]
+        metadatas = [chunk['metadata'] for chunk in chunks]
+        
+        self.collection.add(
+            ids=ids,
+            documents=documents,
+            embeddings=embeddings.tolist(),
+            metadatas=metadatas
+        )
+        print(f"Added {len(chunks)} embeddings to database")
+    
+    def search_similar(self, query_embedding: np.ndarray, n_results: int = 5):
+        """Search for similar documents"""
+        results = self.collection.query(
+            query_embeddings=[query_embedding.tolist()],
+            n_results=n_results
+        )
+        return results
+
+# Initialize and populate vector database
+vector_db = VectorDatabase()
+vector_db.add_embeddings(processed_chunks, embeddings)
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2><span class="phase-icon">2</span>Phase 2: Inference Pipeline (Query Processing)</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">2.1</span>Local LLM Setup</h3>
+                <p><strong>Purpose:</strong> Set up a local language model for generating responses.</p>
+                
+                <div class="code-block">
+# First, install and run Ollama
+# Download from: https://ollama.ai
+# Then run these commands in terminal:
+
+# Pull a suitable model (choose based on your hardware)
+ollama pull llama3.1:8b      # 8B model (requires ~8GB RAM)
+ollama pull llama3.1:70b     # 70B model (requires ~40GB RAM)
+ollama pull mistral:7b       # Alternative 7B model
+ollama pull codellama:13b    # For technical documentation
+
+# Start Ollama server
+ollama serve
+                </div>
+                
+                <div class="code-block">
+import requests
+import json
+
+class LocalLLM:
+    def __init__(self, model_name: str = "llama3.1:8b", base_url: str = "http://localhost:11434"):
+        self.model_name = model_name
+        self.base_url = base_url
+        
+    def generate_response(self, prompt: str, max_tokens: int = 1000) -> str:
+        """Generate response using local Ollama model"""
+        url = f"{self.base_url}/api/generate"
+        payload = {
+            "model": self.model_name,
+            "prompt": prompt,
+            "stream": False,
+            "options": {
+                "num_predict": max_tokens,
+                "temperature": 0.1,  # Low temperature for factual responses
+                "top_p": 0.9
+            }
+        }
+        
+        try:
+            response = requests.post(url, json=payload)
+            response.raise_for_status()
+            return response.json()['response']
+        except Exception as e:
+            return f"Error generating response: {str(e)}"
+
+# Initialize local LLM
+llm = LocalLLM()
+                </div>
+                
+                <div class="important-note">
+                    <h4>⚡ Hardware Requirements:</h4>
+                    <p><strong>Minimum:</strong> 8GB RAM for 7B models | <strong>Recommended:</strong> 16GB+ RAM for 13B models | <strong>High-end:</strong> 32GB+ RAM for 70B models</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2.2</span>Query Processing & Retrieval</h3>
+                <p><strong>Purpose:</strong> Process user queries and retrieve relevant context from the vector database.</p>
+                
+                <div class="code-block">
+class QueryProcessor:
+    def __init__(self, embedding_generator: EmbeddingGenerator, vector_db: VectorDatabase):
+        self.embedding_generator = embedding_generator
+        self.vector_db = vector_db
+    
+    def process_query(self, user_query: str, top_k: int = 5) -> Dict:
+        """Process user query and retrieve relevant context"""
+        print(f"Processing query: {user_query}")
+        
+        # Generate embedding for user query
+        query_embedding = self.embedding_generator.generate_single_embedding(user_query)
+        
+        # Search for similar documents
+        search_results = self.vector_db.search_similar(query_embedding, top_k)
+        
+        # Format results
+        retrieved_docs = []
+        for i, (doc, metadata, distance) in enumerate(zip(
+            search_results['documents'][0],
+            search_results['metadatas'][0],
+            search_results['distances'][0]
+        )):
+            retrieved_docs.append({
+                'content': doc,
+                'metadata': metadata,
+                'similarity_score': 1 - distance,  # Convert distance to similarity
+                'rank': i + 1
+            })
+        
+        return {
+            'query': user_query,
+            'retrieved_docs': retrieved_docs,
+            'context': '\n\n'.join([doc['content'] for doc in retrieved_docs])
+        }
+
+# Initialize query processor
+query_processor = QueryProcessor(embedding_generator, vector_db)
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">2.3</span>Response Generation with RAG</h3>
+                <p><strong>Purpose:</strong> Generate contextually accurate responses using retrieved information.</p>
+                
+                <div class="code-block">
+class RAGChatbot:
+    def __init__(self, query_processor: QueryProcessor, llm: LocalLLM):
+        self.query_processor = query_processor
+        self.llm = llm
+        
+    def create_rag_prompt(self, query: str, context: str) -> str:
+        """Create a well-structured prompt for RAG"""
+        prompt = f"""You are an expert assistant for a technical user manual. Your task is to provide accurate, helpful answers based ONLY on the provided context.
+
+INSTRUCTIONS:
+1. Answer the question using ONLY the information provided in the context below
+2. If the answer is not in the context, clearly state "I don't have enough information in the manual to answer this question"
+3. Cite specific sections or pages when possible
+4. Be concise but comprehensive
+5. Use technical language appropriate for the manual
+
+CONTEXT FROM USER MANUAL:
+{context}
+
+USER QUESTION: {query}
+
+RESPONSE:"""
+        return prompt
+    
+    def generate_answer(self, user_query: str) -> Dict:
+        """Generate comprehensive answer using RAG pipeline"""
+        # Retrieve relevant context
+        retrieval_results = self.query_processor.process_query(user_query)
+        
+        # Create RAG prompt
+        rag_prompt = self.create_rag_prompt(
+            user_query, 
+            retrieval_results['context']
+        )
+        
+        # Generate response
+        response = self.llm.generate_response(rag_prompt)
+        
+        # Compile final answer
+        return {
+            'query': user_query,
+            'answer': response,
+            'sources': retrieval_results['retrieved_docs'],
+            'context_used': retrieval_results['context']
+        }
+
+# Initialize RAG chatbot
+rag_chatbot = RAGChatbot(query_processor, llm)
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2><span class="phase-icon">3</span>Phase 3: User Interface Development</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">3.1</span>Streamlit Web Interface</h3>
+                <p><strong>Purpose:</strong> Create an intuitive web-based interface for users to interact with the chatbot.</p>
+                
+                <div class="code-block">
+import streamlit as st
+import time
+from datetime import datetime
+
+def create_streamlit_app():
+    """Create Streamlit web interface for the RAG chatbot"""
+    
+    st.set_page_config(
+        page_title="User Manual Chatbot",
+        page_icon="🤖",
+        layout="wide",
+        initial_sidebar_state="expanded"
+    )
+    
+    # Custom CSS for better UI
+    st.markdown("""
+    <style>
+    .main-header {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .chat-message {
+        padding: 1rem;
+        border-radius: 10px;
+        margin: 1rem 0;
+        border-left: 5px solid #667eea;
+    }
+    .user-message {
+        background-color: #f0f2f6;
+        border-left-color: #28a745;
+    }
+    .bot-message {
+        background-color: #e8f4fd;
+        border-left-color: #007bff;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Header
+    st.markdown('<div class="main-header"><h1>🤖 User Manual Assistant</h1><p>Ask questions about your user manual</p></div>', unsafe_allow_html=True)
+    
+    # Sidebar
+    with st.sidebar:
+        st.header("ℹ️ Information")
+        st.info("This chatbot operates completely offline using your local user manual.")
+        
+        st.header("📊 System Status")
+        if 'rag_chatbot' in st.session_state:
+            st.success("✅ Chatbot Ready")
+        else:
+            st.error("❌ Chatbot Not Initialized")
+            
+        st.header("🔧 Settings")
+        top_k = st.slider("Number of context chunks", 3, 10, 5)
+        temperature = st.slider("Response creativity", 0.0, 1.0, 0.1)
+    
+    # Initialize session state
+    if 'messages' not in st.session_state:
+        st.session_state.messages = []
+    
+    # Display chat messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+            if message["role"] == "assistant" and "sources" in message:
+                with st.expander("📚 View Sources"):
+                    for i, source in enumerate(message["sources"]):
+                        st.write(f"**Source {i+1}:** Page {source['metadata'].get('page', 'N/A')}")
+                        st.write(f"Similarity: {source['similarity_score']:.3f}")
+                        st.write(source['content'][:200] + "...")
+                        st.divider()
+    
+    # Chat input
+    if prompt := st.chat_input("Ask a question about the user manual..."):
+        # Add user message
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+        
+        # Generate response
+        with st.chat_message("assistant"):
+            with st.spinner("Searching manual and generating response..."):
+                if 'rag_chatbot' in st.session_state:
+                    response_data = st.session_state.rag_chatbot.generate_answer(prompt)
+                    response = response_data['answer']
+                    sources = response_data['sources']
+                    
+                    st.markdown(response)
+                    
+                    # Add assistant message with sources
+                    st.session_state.messages.append({
+                        "role": "assistant", 
+                        "content": response,
+                        "sources": sources
+                    })
+                else:
+                    st.error("Chatbot not initialized. Please run the setup first.")
+
+# Main app runner
+def main():
+    """Main application entry point"""
+    st.title("🚀 RAG Chatbot Setup")
+    
+    if 'setup_complete' not in st.session_state:
+        st.session_state.setup_complete = False
+    
+    if not st.session_state.setup_complete:
+        st.header("📁 Upload User Manual")
+        uploaded_file = st.file_uploader(
+            "Choose your user manual file", 
+            type=['pdf', 'docx'],
+            help="Upload a PDF or Word document containing your user manual"
+        )
+        
+        if uploaded_file is not None and st.button("🔄 Process Manual"):
+            with st.spinner("Processing manual..."):
+                # Save uploaded file
+                with open(f"temp_{uploaded_file.name}", "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                
+                # Initialize all components
+                progress_bar = st.progress(0)
+                
+                # Step 1: Extract text
+                st.write("📄 Extracting text from manual...")
+                if uploaded_file.name.endswith('.pdf'):
+                    text_chunks = extract_text_from_pdf(f"temp_{uploaded_file.name}")
+                else:
+                    text_chunks = extract_text_from_docx(f"temp_{uploaded_file.name}")
+                progress_bar.progress(20)
+                
+                # Step 2: Process and chunk
+                st.write("🧹 Processing and chunking text...")
+                processed_chunks = process_documents(text_chunks)
+                progress_bar.progress(40)
+                
+                # Step 3: Generate embeddings
+                st.write("🧮 Generating embeddings...")
+                embedding_generator = EmbeddingGenerator()
+                embeddings = embedding_generator.generate_embeddings(
+                    [chunk['content'] for chunk in processed_chunks]
+                )
+                progress_bar.progress(60)
+                
+                # Step 4: Setup vector database
+                st.write("💾 Setting up vector database...")
+                vector_db = VectorDatabase()
+                vector_db.add_embeddings(processed_chunks, embeddings)
+                progress_bar.progress(80)
+                
+                # Step 5: Initialize chatbot
+                st.write("🤖 Initializing chatbot...")
+                llm = LocalLLM()
+                query_processor = QueryProcessor(embedding_generator, vector_db)
+                rag_chatbot = RAGChatbot(query_processor, llm)
+                progress_bar.progress(100)
+                
+                # Store in session state
+                st.session_state.rag_chatbot = rag_chatbot
+                st.session_state.setup_complete = True
+                
+                st.success("✅ Setup complete! You can now start asking questions.")
+                st.rerun()
+    else:
+        create_streamlit_app()
+
+if __name__ == "__main__":
+    main()
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">3.2</span>Advanced UI Features</h3>
+                <p><strong>Purpose:</strong> Add enhanced features for better user experience.</p>
+                
+                <div class="code-block">
+# Enhanced features for the Streamlit app
+def add_advanced_features():
+    """Add advanced UI features"""
+    
+    # Chat history export
+    def export_chat_history():
+        if st.session_state.messages:
+            chat_data = {
+                "timestamp": datetime.now().isoformat(),
+                "messages": st.session_state.messages
+            }
+            return json.dumps(chat_data, indent=2)
+        return None
+    
+    # Search functionality
+    def search_manual(query, top_k=10):
+        if 'rag_chatbot' in st.session_state:
+            results = st.session_state.rag_chatbot.query_processor.process_query(query, top_k)
+            return results['retrieved_docs']
+        return []
+    
+    # Add to sidebar
+    with st.sidebar:
+        st.header("💾 Export Options")
+        if st.button("📥 Export Chat History"):
+            chat_export = export_chat_history()
+            if chat_export:
+                st.download_button(
+                    label="📄 Download JSON",
+                    data=chat_export,
+                    file_name=f"chat_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json",
+                    mime="application/json"
+                )
+        
+        st.header("🔍 Quick Search")
+        search_query = st.text_input("Search manual contents:")
+        if search_query:
+            search_results = search_manual(search_query)
+            for i, result in enumerate(search_results[:3]):
+                st.write(f"**Result {i+1}:**")
+                st.write(result['content'][:100] + "...")
+                st.write(f"Page: {result['metadata'].get('page', 'N/A')}")
+                st.divider()
+                </div>
+            </div>
+        </div>
+
+        <div class="phase">
+            <h2><span class="phase-icon">4</span>Phase 4: Deployment & Packaging</h2>
+            
+            <div class="step">
+                <h3><span class="step-number">4.1</span>Creating Deployment Package</h3>
+                <p><strong>Purpose:</strong> Package the entire application for offline deployment.</p>
+                
+                <div class="code-block">
+# requirements.txt
+sentence-transformers==2.2.2
+chromadb==0.4.15
+pypdf==3.15.2
+python-docx==0.8.11
+streamlit==1.28.1
+torch==2.0.1
+transformers==4.34.0
+requests==2.31.0
+numpy==1.24.3
+                </div>
+                
+                <div class="code-block">
+# deployment_script.py
+import os
+import subprocess
+import sys
+import shutil
+
+def create_deployment_package():
+    """Create a complete deployment package"""
+    
+    print("🚀 Creating deployment package...")
+    
+    # Create deployment directory
+    deploy_dir = "rag_chatbot_deployment"
+    if os.path.exists(deploy_dir):
+        shutil.rmtree(deploy_dir)
+    os.makedirs(deploy_dir)
+    
+    # Copy application files
+    files_to_copy = [
+        'main_app.py',
+        'requirements.txt',
+        'README.md',
+        'config.py'
+    ]
+    
+    for file in files_to_copy:
+        if os.path.exists(file):
+            shutil.copy2(file, deploy_dir)
+    
+    # Create startup scripts
+    # Windows batch file
+    with open(os.path.join(deploy_dir, 'start_chatbot.bat'), 'w') as f:
+        f.write("""@echo off
+echo Starting RAG Chatbot...
+echo Installing dependencies...
+pip install -r requirements.txt
+
+echo Starting Ollama server...
+start /B ollama serve
+
+echo Waiting for Ollama to start...
+timeout /t 5
+
+echo Starting Streamlit app...
+streamlit run main_app.py
+
+pause
+""")
+    
+    # Linux/Mac shell script
+    with open(os.path.join(deploy_dir, 'start_chatbot.sh'), 'w') as f:
+        f.write("""#!/bin/bash
+echo "Starting RAG Chatbot..."
+echo "Installing dependencies..."
+pip install -r requirements.txt
+
+echo "Starting Ollama server..."
+ollama serve &
+
+echo "Waiting for Ollama to start..."
+sleep 5
+
+echo "Starting Streamlit app..."
+streamlit run main_app.py
+""")
+    
+    # Make shell script executable
+    os.chmod(os.path.join(deploy_dir, 'start_chatbot.sh'), 0o755)
+    
+    print(f"✅ Deployment package created in '{deploy_dir}' directory")
+    print("📋 Next steps:")
+    print("1. Copy the entire deployment directory to target machine")
+    print("2. Install Python 3.8+ on target machine")
+    print("3. Install Ollama from https://ollama.ai")
+    print("4. Run start_chatbot.bat (Windows) or ./start_chatbot.sh (Linux/Mac)")
+
+if __name__ == "__main__":
+    create_deployment_package()
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">4.2</span>Configuration Management</h3>
+                <p><strong>Purpose:</strong> Create configurable settings for different deployment scenarios.</p>
+                
+                <div class="code-block">
+# config.py
+import os
+from typing import Dict, Any
+
+class RAGConfig:
+    """Configuration class for RAG chatbot"""
+    
+    # Model configurations
+    EMBEDDING_MODEL = "all-MiniLM-L6-v2"  # Lightweight for most use cases
+    LLM_MODEL = "llama3.1:8b"             # Local LLM model
+    
+    # Vector database settings
+    VECTOR_DB_PATH = "./vector_db"
+    COLLECTION_NAME = "user_manual_docs"
+    
+    # Text processing settings
+    CHUNK_SIZE = 500
+    CHUNK_OVERLAP = 100
+    TOP_K_RESULTS = 5
+    
+    # LLM settings
+    TEMPERATURE = 0.1
+    MAX_TOKENS = 1000
+    
+    # UI settings
+    PAGE_TITLE = "User Manual Assistant"
+    PAGE_ICON = "🤖"
+    
+    # File upload settings
+    MAX_FILE_SIZE_MB = 50
+    ALLOWED_EXTENSIONS = ['.pdf', '.docx']
+    
+    # Ollama settings
+    OLLAMA_BASE_URL = "http://localhost:11434"
+    OLLAMA_TIMEOUT = 30
+    
+    @classmethod
+    def load_from_env(cls) -> Dict[str, Any]:
+        """Load configuration from environment variables"""
+        return {
+            'embedding_model': os.getenv('EMBEDDING_MODEL', cls.EMBEDDING_MODEL),
+            'llm_model': os.getenv('LLM_MODEL', cls.LLM_MODEL),
+            'vector_db_path': os.getenv('VECTOR_DB_PATH', cls.VECTOR_DB_PATH),
+            'chunk_size': int(os.getenv('CHUNK_SIZE', cls.CHUNK_SIZE)),
+            'top_k_results': int(os.getenv('TOP_K_RESULTS', cls.TOP_K_RESULTS)),
+            'temperature': float(os.getenv('TEMPERATURE', cls.TEMPERATURE)),
+            'ollama_url': os.getenv('OLLAMA_BASE_URL', cls.OLLAMA_BASE_URL)
+        }
+    
+    @classmethod
+    def validate_config(cls, config: Dict[str, Any]) -> bool:
+        """Validate configuration parameters"""
+        try:
+            assert 0 <= config['temperature'] <= 2.0, "Temperature must be between 0 and 2"
+            assert config['chunk_size'] > 0, "Chunk size must be positive"
+            assert config['top_k_results'] > 0, "Top K results must be positive"
+            return True
+        except AssertionError as e:
+            print(f"Configuration error: {e}")
+            return False
+                </div>
+            </div>
+
+            <div class="step">
+                <h3><span class="step-number">4.3</span>Complete Application Integration</h3>
+                <p><strong>Purpose:</strong> Integrate all components into a single, deployable application.</p>
+                
+                <div class="code-block">
+# main_app.py - Complete integrated application
+import streamlit as st
+import sys
+import os
+from pathlib import Path
+
+# Add project root to path
+project_root = Path(__file__).parent
+sys.path.append(str(project_root))
+
+from config import RAGConfig
+# Import all your classes here
+# from rag_components import EmbeddingGenerator, VectorDatabase, LocalLLM, etc.
+
+def main():
+    """Main application entry point"""
+    
+    # Load configuration
+    config = RAGConfig.load_from_env()
+    
+    # Validate configuration
+    if not RAGConfig.validate_config(config):
+        st.error("❌ Invalid configuration. Please check your settings.")
+        return
+    
+    # Set page config
+    st.set_page_config(
+        page_title=RAGConfig.PAGE_TITLE,
+        page_icon=RAGConfig.PAGE_ICON,
+        layout="wide"
+    )
+    
+    # Initialize application
+    initialize_app(config)
+
+def initialize_app(config):
+    """Initialize the complete RAG application"""
+    
+    st.markdown("# 🤖 Offline RAG Chatbot")
+    st.markdown("*Secure, local processing of your user manual*")
+    
+    # Check system requirements
+    check_system_requirements()
+    
+    # Main application logic
+    if 'app_initialized' not in st.session_state:
+        show_setup_page(config)
+    else:
+        show_chat_interface(config)
+
+def check_system_requirements():
+    """Check if all system requirements are met"""
+    requirements_met = True
+    
+    with st.expander("🔧 System Requirements Check"):
+        # Check Ollama
+        try:
+            import requests
+            response = requests.get("http://localhost:11434/api/tags", timeout=5)
+            if response.status_code == 200:
+                st.success("✅ Ollama server is running")
+            else:
+                st.error("❌ Ollama server not responding")
+                requirements_met = False
+        except Exception:
+            st.error("❌ Ollama server not accessible. Please start Ollama first.")
+            st.code("ollama serve")
+            requirements_met = False
+        
+        # Check available models
+        try:
+            response = requests.get("http://localhost:11434/api/tags")
+            models = response.json().get('models', [])
+            model_names = [model['name'] for model in models]
+            
+            if any('llama' in name.lower() for name in model_names):
+                st.success(f"✅ LLM models available: {', '.join(model_names)}")
+            else:
+                st.warning("⚠️ No LLM models found. Please pull a model first.")
+                st.code("ollama pull llama3.1:8b")
+        except Exception as e:
+            st.warning(f"⚠️ Could not check available models: {e}")
+    
+    return requirements_met
+
+if __name__ == "__main__":
+    main()
+                </div>
+            </div>
+        </div>
+
+        <div class="important-note">
+            <h4>🎯 Complete Implementation Checklist</h4>
+            <ul style="margin-left: 20px;">
+                <li>✅ Install all dependencies and set up environment</li>
+                <li>✅ Implement document loading and text extraction</li>
+                <li>✅ Create text preprocessing and chunking pipeline</li>
+                <li>✅ Set up embedding generation with local models</li>
+                <li>✅ Configure vector database for similarity search</li>
+                <li>✅ Install and configure local LLM (Ollama)</li>
+                <li>✅ Implement query processing and retrieval</li>
+                <li>✅ Create RAG response generation pipeline</li>
+                <li>✅ Build Streamlit user interface</li>
+                <li>✅ Package for offline deployment</li>
+                <li>✅ Test complete end-to-end workflow</li>
+            </ul>
+        </div>
+
+        <div class="security-note">
+            <h4>🔐 Security & Privacy Advantages</h4>
+            <ul style="margin-left: 20px;">
+                <li><strong>Complete Offline Operation:</strong> No data leaves your local network</li>
+                <li><strong>Local Storage:</strong> All embeddings and models stored locally</li>
+                <li><strong>No API Keys:</strong> No external service dependencies</li>
+                <li><strong>Air-gapped Deployment:</strong> Can run on isolated systems</li>
+                <li><strong>Data Control:</strong> Full control over sensitive documentation</li>
+            </ul>
+        </div>
+
+        <div class="tech-stack">
+            <h4>📊 Performance Optimization Tips</h4>
+            <div class="tech-list">
+                <span class="tech-item">Use GPU acceleration for embeddings if available</span>
+                <span class="tech-item">Implement caching for frequent queries</span>
+                <span class="tech-item">Optimize chunk size based on document structure</span>
+                <span class="tech-item">Use quantized models for better performance</span>
+                <span class="tech-item">Implement batch processing for large documents</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 30px; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 15px; margin: 30px 0;">
+            <h3 style="color: white; margin-bottom: 20px;">📥 Download Complete Implementation</h3>
+            <button class="download-btn" onclick="window.print()">🖨️ Print Guide</button>
+            <button class="download-btn" onclick="downloadHTML()">📄 Save as HTML</button>
+        </div>
+
+        <div class="overview" style="margin-top: 30px;">
+            <h2>🎉 Congratulations!</h2>
+            <p>You now have a complete blueprint for building a fully offline RAG chatbot for your user manual. This implementation ensures:</p>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li><strong>Security:</strong> All processing happens locally</li>
+                <li><strong>Accuracy:</strong> RAG provides context-aware responses</li>
+                <li><strong>Scalability:</strong> Can handle large user manuals</li>
+                <li><strong>User-Friendly:</strong> Intuitive web interface</li>
+                <li><strong>Maintainable:</strong> Modular, well-documented code</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function downloadHTML() {
+            const element = document.documentElement;
+            const opt = {
+                margin: 1,
+                filename: 'RAG_Chatbot_Implementation_Guide.html',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            // Create download link
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'RAG_Chatbot_Complete_Guide.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
